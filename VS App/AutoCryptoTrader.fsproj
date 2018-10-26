@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageId>Alex75.AutoCryptoTrader</PackageId>
+    <Authors>Alessandro Piccione</Authors>
+    <Company>DreadmSoft</Company>
+    <Copyright>yes</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>    
+    <None Include="README.md" />
+    <Compile Include="Logging.fs" />
+    <Compile Include="SayHello.fs" />
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="log4net" Version="2.0.8" />
+  </ItemGroup>
+
+</Project>
