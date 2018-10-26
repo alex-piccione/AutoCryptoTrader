@@ -23,14 +23,11 @@ let configLogger() =
     resultAppender.File <- "C:\\Logs\\Autotrader.log"    
     resultAppender.AppendToFile <- true
     resultAppender.Layout <- Layout.PatternLayout("%date %-5level [%2thread] %message%newline")
-    resultAppender.ImmediateFlush <- true
+    resultAppender.ImmediateFlush <- false
     resultAppender.RollingStyle <- RollingFileAppender.RollingMode.Date;
     resultAppender.ActivateOptions()
     hierarchy.Root.AddAppender resultAppender
 
-    
-    //let reader = File.OpenText("C:\\Logs\\Autotrader.log")
-    //reader.Close()
 
     //hierarchy.Configured <- true
 
