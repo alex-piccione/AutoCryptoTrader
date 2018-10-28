@@ -13,4 +13,11 @@ https://dungpa.github.io/fsharp-cheatsheet/
   http://blog.ctaggart.com/2016/11/google-logging-from-log4net.html
 
 
+### Interfaces
 
+- https://fsharpforfunandprofit.com/posts/interfaces/
+- ...
+
+### Events 
+
+- https://msdn.microsoft.com/en-us/visualfsharpdocs/conceptual/event.trigger['t]-method-[fsharp]

@@ -11,6 +11,9 @@
   </PropertyGroup>
 
   <ItemGroup>    
+    <Compile Include="Entities.fs" />    
+    <Compile Include="ExchangeInterface.fs" />    
+    <Compile Include="Trading.fs" />    
     <None Include="README.md" />
     <Compile Include="Logging.fs" />
     <Compile Include="SayHello.fs" />
