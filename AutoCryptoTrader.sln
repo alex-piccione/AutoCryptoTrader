@@ -3,11 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2046
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "AutoCryptoTrader", "Core/AutoCryptoTrader.Core.fsproj", "{2F183B2A-1B55-4509-9877-41E7D71D3790}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "AutoCryptoTrader.Core", "Core\AutoCryptoTrader.Core.fsproj", "{2F183B2A-1B55-4509-9877-41E7D71D3790}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{FB2F41EC-9518-4271-A276-656844BE41EC}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "UnitTests", "UnitTests\AutoCryptoTrader.UnitTests.fsproj", "{956E800A-E142-4736-B07B-8ABC51E583C1}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "AutoCryptoTrader.UnitTests", "UnitTests\AutoCryptoTrader.UnitTests.fsproj", "{956E800A-E142-4736-B07B-8ABC51E583C1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CDA2E373-F63B-47E8-920D-BF3EF77C4632}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

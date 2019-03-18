@@ -2,6 +2,7 @@
 open System.IO
 open System.Reflection
 open Trading
+open Configuration
 open System.Threading
 
 
@@ -11,6 +12,13 @@ let main argv =
     let version = 0.1
 
     printfn "CryptoAutotrader v %f" version
+
+    // load configuration
+    let mongoDB = {ConnectionString = ""}
+    let binance = {ApiPublicKey=""; ApiSecretKey="" }
+    let trading = {InitialAmount=100m; SellPricePercentageTreshold=2m; PriceCheckFrequency = TimeSpan.FromSeconds(60.); BuyAmountUsd = 100m }
+    
+    let config = Configuration(mongoDB, binance, trading) 
 
     let logFile = sprintf @"logs/Autotrader (%s).log" (DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss"))
     Logging.configLogger(Path.Combine( __SOURCE_DIRECTORY__, logFile))

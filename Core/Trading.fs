@@ -30,13 +30,12 @@ type ITrader =
         
 type TraderConfiguration = {
     InitialAmount:decimal
-    StopLoss: decimal  // max loose; when reached, stops trading
+    StopLoss: decimal  // max loose; when reached, stop trading
     SessionLength:TimeSpan
 }
 
 // dummy trader
 type DummyTrader(configuration) = 
-
 
     let StartTrading = printfn "start trading"
     let StopTrading = printfn "stop trading"

@@ -1,0 +1,15 @@
+﻿MongoDB:
+ - connection string: "mongodb://web:1E134A34-E01E-4F51-B4BE-D88CA980D2FA@localhost:27017/xrpshop?uuidRepresentation=standard
+
+Binance:
+ - API public key: aaa
+ - API private key
+
+ Trading:
+  - initial amount: 100
+  - sell percentage threshold: 2.0
+  - price check frequency in seconds: 60
+  - buy amont in USD: 100 
+
+
+

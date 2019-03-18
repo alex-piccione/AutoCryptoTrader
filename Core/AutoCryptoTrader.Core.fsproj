@@ -11,12 +11,16 @@
   </PropertyGroup>
 
   <ItemGroup>    
-    <Compile Include="Entities.fs" />    
-    <Compile Include="ExchangeInterface.fs" />    
+    <None Include="DEV TIPS.md" />    
+    <None Include="configuration.yaml" />    
+    <Compile Include="Configuration.fs" />    
     <Compile Include="Trading.fs" />    
-    <None Include="README.md" />
+    <Compile Include="TradeRunner.fs" />    
+    <None Include="lists.fsx" />    
+    <Compile Include="SayHello.fs" />    
+    <Compile Include="Entities.fs" />    
+    <Compile Include="ExchangeInterface.fs" />
     <Compile Include="Logging.fs" />
-    <Compile Include="SayHello.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
