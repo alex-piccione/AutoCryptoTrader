@@ -1,4 +1,6 @@
-﻿open System
+﻿module AutoCryptoTrader.Core.Program
+
+open System
 open System.IO
 open System.Reflection
 open Trading
@@ -7,7 +9,7 @@ open System.Threading
 
 
 
-[<EntryPoint>]
+
 let main argv =
     let version = 0.1
 

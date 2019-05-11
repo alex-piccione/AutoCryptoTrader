@@ -1,18 +1,24 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2046
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28902.138
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "AutoCryptoTrader.Core", "Core\AutoCryptoTrader.Core.fsproj", "{2F183B2A-1B55-4509-9877-41E7D71D3790}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Core", "Core\Core.fsproj", "{2F183B2A-1B55-4509-9877-41E7D71D3790}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{FB2F41EC-9518-4271-A276-656844BE41EC}"
 EndProject
-Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "AutoCryptoTrader.UnitTests", "UnitTests\AutoCryptoTrader.UnitTests.fsproj", "{956E800A-E142-4736-B07B-8ABC51E583C1}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "UnitTests", "UnitTests\UnitTests.fsproj", "{956E800A-E142-4736-B07B-8ABC51E583C1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CDA2E373-F63B-47E8-920D-BF3EF77C4632}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "UI App", "UI App\UI App\UI App.fsproj", "{A454E4A4-02AE-4AA6-BC1B-911ADC32E3CE}"
+EndProject
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "UI App.Desktop", "UI App\UI App.Desktop\UI App.Desktop.fsproj", "{CFB2E68B-40A3-42B7-B879-DEA2FF6A5CAC}"
+EndProject
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Desktop Application", "UI Application 2\Desktop Application.fsproj", "{B4EF0E4A-575C-49EA-9D7B-5141D84F6D07}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,6 +34,18 @@ Global
 		{956E800A-E142-4736-B07B-8ABC51E583C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{956E800A-E142-4736-B07B-8ABC51E583C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{956E800A-E142-4736-B07B-8ABC51E583C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A454E4A4-02AE-4AA6-BC1B-911ADC32E3CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A454E4A4-02AE-4AA6-BC1B-911ADC32E3CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A454E4A4-02AE-4AA6-BC1B-911ADC32E3CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A454E4A4-02AE-4AA6-BC1B-911ADC32E3CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFB2E68B-40A3-42B7-B879-DEA2FF6A5CAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFB2E68B-40A3-42B7-B879-DEA2FF6A5CAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFB2E68B-40A3-42B7-B879-DEA2FF6A5CAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFB2E68B-40A3-42B7-B879-DEA2FF6A5CAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4EF0E4A-575C-49EA-9D7B-5141D84F6D07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4EF0E4A-575C-49EA-9D7B-5141D84F6D07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4EF0E4A-575C-49EA-9D7B-5141D84F6D07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4EF0E4A-575C-49EA-9D7B-5141D84F6D07}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

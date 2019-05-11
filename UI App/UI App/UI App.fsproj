@@ -1,0 +1,25 @@
+﻿<Project Sdk="FSharp.NET.Sdk;Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <RootNamespace>UI_App</RootNamespace>
+    <PackageVersion>1.0</PackageVersion>
+    <Title>UI App</Title>
+    <Copyright>Copyright © 2019</Copyright>
+    <Description>Description of UI App</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="MainForm.eto.fs" />
+    <Compile Include="MainForm.fs" />
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FSharp.NET.Sdk" Version="1.0.5" PrivateAssets="All" />
+    <PackageReference Include="FSharp.Core" Version="4.6.2" />
+    <PackageReference Include="Eto.Forms" Version="2.4.1" />
+  </ItemGroup>
+  
+</Project>

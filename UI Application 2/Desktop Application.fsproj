@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net472</TargetFramework>
+    <RootNamespace>UI_Application_2</RootNamespace>
+    <AssemblyName>AutoCryptoTrader.DesktopApplication</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Forms\MainForm.fs" />
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FSharp.Charting" Version="2.1.0" />
+    <Reference Include="System.Windows.Forms" />
+    <PackageReference Update="FSharp.Core" Version="4.6.2" />
+  </ItemGroup>
+
+</Project>
