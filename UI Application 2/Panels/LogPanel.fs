@@ -1,6 +1,7 @@
 ﻿module Panels.logPanel
 
 open System.Windows.Forms
+open System
 
 type LogPanel () as panel =
     inherit Panel()
@@ -11,6 +12,8 @@ type LogPanel () as panel =
     let commandbar = new Panel()
     let cleanButton = new Button()
 
+
+    let ctx = System.Threading.SynchronizationContext.Current
 
     do
         
@@ -55,8 +58,15 @@ type LogPanel () as panel =
         cleanButton.Click.AddHandler (new System.EventHandler( fun sender e -> panel.SetText ""))
 
 
-    member panel.SetText text =  textbox.Text <- text
-    member panel.AddText text = textbox.Text <- sprintf "%s\r\n%s" textbox.Text text
-        
+    member panel.SetText text = 
+        if textbox.InvokeRequired then
+            panel.Invoke( new Action( fun() -> textbox.Text <- text) ) |> ignore
+        else
+            textbox.Text <- text
 
-    
+    member panel.AddText text = 
+        if textbox.InvokeRequired then 
+            panel.Invoke( new Action(fun() -> textbox.Text <- sprintf "%s\r\n%s" textbox.Text text )) |> ignore
+        else
+            textbox.Text <- sprintf "%s\r\n%s" textbox.Text text
+            
