@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <PackageReference Include="FSharp.Charting" Version="2.1.0" />
+    <ProjectReference Include="..\Core\Core.fsproj" />
     <Reference Include="System.Windows.Forms" />
     <PackageReference Update="FSharp.Core" Version="4.6.2" />
   </ItemGroup>

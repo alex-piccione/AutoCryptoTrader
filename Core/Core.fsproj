@@ -12,13 +12,14 @@
   </PropertyGroup>
 
   <ItemGroup>    
+    <Compile Include="ITrader.fs" />    
+    <Compile Include="FirstTrader.fs" />    
     <None Include="DEV TIPS.md" />    
     <None Include="configuration.yaml" />    
     <Compile Include="Configuration.fs" />    
     <Compile Include="Trading.fs" />    
     <Compile Include="TradeRunner.fs" />    
     <None Include="lists.fsx" />    
-    <Compile Include="SayHello.fs" />    
     <Compile Include="Entities.fs" />    
     <Compile Include="ExchangeInterface.fs" />
     <Compile Include="Logging.fs" />

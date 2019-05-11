@@ -11,9 +11,6 @@ open System.Threading
 
 
 let main argv =
-    let version = 0.1
-
-    printfn "CryptoAutotrader v %f" version
 
     // load configuration
     let mongoDB = {ConnectionString = ""}
@@ -22,11 +19,10 @@ let main argv =
     
     let config = Configuration(mongoDB, binance, trading) 
 
-    let logFile = sprintf @"logs/Autotrader (%s).log" (DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss"))
+    let logFile = sprintf @"logs/AutoCryptoTrader (%s).log" (DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss"))
     Logging.configLogger(Path.Combine( __SOURCE_DIRECTORY__, logFile))
 
     let logger = log4net.LogManager.GetLogger( Assembly.GetExecutingAssembly(), "root")
-    logger.Info (sprintf "Start CryptoAutotrader v %f" version)
 
     // do the job here
 
