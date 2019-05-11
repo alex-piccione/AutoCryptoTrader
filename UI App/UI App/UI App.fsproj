@@ -1,7 +1,7 @@
 ﻿<Project Sdk="FSharp.NET.Sdk;Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>UI_App</RootNamespace>
     <PackageVersion>1.0</PackageVersion>
     <Title>UI App</Title>

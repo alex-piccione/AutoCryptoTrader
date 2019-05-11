@@ -1,0 +1,12 @@
+﻿Trading:
+    initial amount: 100
+    sell percentage threshold: 2.0
+    price check frequency in seconds: 60
+    buy amont in USD: 100 
+
+Bitstamp: 
+    ticker cache: 15
+    account number: "123456"
+    public key: "aaa"
+    secret key: "bbb"
+

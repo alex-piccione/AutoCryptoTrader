@@ -8,6 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="settings.yaml" />
+    <Compile Include="settings.fs" />
     <Compile Include="colors.fs" />
     <Compile Include="Panels\LogPanel.fs" />
     <Compile Include="Forms\MainForm.fs" />
@@ -22,6 +24,7 @@
 
   <ItemGroup>
     <PackageReference Include="FSharp.Charting" Version="2.1.0" />
+    <PackageReference Include="FSharp.Configuration" Version="1.5.0" />
     <ProjectReference Include="..\Core\Core.fsproj" />
     <Reference Include="System.Windows.Forms" />
     <PackageReference Update="FSharp.Core" Version="4.6.2" />

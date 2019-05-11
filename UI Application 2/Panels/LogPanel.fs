@@ -32,6 +32,7 @@ type LogPanel () as panel =
         textbox.BackColor <- colors.background
         textbox.ForeColor <- colors.text
         //textbox.Font <- System.Drawing.Font
+        //textbox.Font.S
 
 
         textbox.Dock <- DockStyle.Fill

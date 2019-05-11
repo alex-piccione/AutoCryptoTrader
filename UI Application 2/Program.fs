@@ -3,7 +3,6 @@
 open System
 open System.Windows.Forms
 
-open AutoCryptoTrader.Core
 open AutoCryptoTrader.DesktopApplication.Forms
 
 
@@ -14,7 +13,11 @@ let main argv =
     Application.EnableVisualStyles()
     Application.SetCompatibleTextRenderingDefault false
 
-    use form = new MainForm()
+    
+    let configuration = settings.Settings()
+
+    use form = new MainForm(configuration)
+
          
 
     Application.Run(form)

@@ -5,13 +5,15 @@ open System.Windows.Forms
 open System.Drawing
 open Panels.logPanel
 
+open Alex75.BitstampApiClient
 open AutoCryptoTrader.Core
+
 
 // ref: https://www.codeproject.com/Articles/30414/Getting-Started-in-F-A-Windows-Forms-Application
 // https://blogs.msdn.microsoft.com/mcsuksoldev/2011/05/27/f-windows-application-template-for-winforms/
 // https://github.com/Acadian-Ambulance/vinyl-ui
 
-type MainForm () as this =
+type MainForm (config:settings.Settings) as this =
     inherit Form()
 
     let logPanel = new LogPanel()
@@ -19,7 +21,17 @@ type MainForm () as this =
 
     let initializeTrader() = 
 
-        let trader = new FirstTrader() :> ITrader
+        let bitstampConfig = { 
+            TickerCacheDuration=TimeSpan.FromSeconds(float(config.Bitstamp.``ticker cache``));
+            CustomerId=config.Bitstamp.``account number``
+            PublicKey=config.Bitstamp.``public key``;
+            SecretKey=config.Bitstamp.``secret key``;
+            }
+        let bitstampClient = new Alex75.BitstampApiClient.Client(bitstampConfig) :> IClient
+
+
+
+        let trader = new FirstTrader(bitstampClient) :> ITrader
         trader.log.Add (fun log -> logPanel.AddText log )
         trader.start()
 
