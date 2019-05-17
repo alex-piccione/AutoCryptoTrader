@@ -12,6 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>    
+    <Compile Include="retryer.fs" />    
     <Compile Include="ITrader.fs" />    
     <Compile Include="FirstTrader.fs" />    
     <None Include="DEV TIPS.md" />    

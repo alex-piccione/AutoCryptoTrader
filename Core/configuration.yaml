@@ -5,11 +5,12 @@ Binance:
  - API public key: aaa
  - API private key
 
- Trading:
+Trading:
   - initial amount: 100
   - sell percentage threshold: 2.0
   - price check frequency in seconds: 60
   - buy amont in USD: 100 
 
-
+Bitstamp:
+  fee %: 0.25
 

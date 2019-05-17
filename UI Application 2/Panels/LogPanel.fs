@@ -9,23 +9,24 @@ type LogPanel () as panel =
     let textboxContainer = new Panel()
     let textbox = new RichTextBox()
     
-    let commandbar = new Panel()
+    let toolBar = new Panel()
     let cleanButton = new Button()
 
 
     let ctx = System.Threading.SynchronizationContext.Current
 
     do
-        
-        textboxContainer.Padding <- Padding(10) // TextBox does not have margin or padding
+       
         panel.Controls.Add textboxContainer
-        textboxContainer.Dock <- DockStyle.Fill
-
-        panel.Controls.Add commandbar
-        commandbar.Dock <- DockStyle.Top
+        textboxContainer.Dock <- DockStyle.Fill    // "Dock=Fill" must be always the first one
+        
+        panel.Controls.Add toolBar
+        toolBar.Dock <- DockStyle.Top
 
         // textbox
+        textboxContainer.Padding <- Padding(10) // TextBox does not have margin or padding
         textboxContainer.Controls.Add textbox
+        textbox.Dock <- DockStyle.Fill
         //textboxContainer.BackColor <- colors.background
 
         textbox.ScrollBars <- RichTextBoxScrollBars.Vertical
@@ -34,19 +35,16 @@ type LogPanel () as panel =
         textbox.ReadOnly <- true
         textbox.BackColor <- colors.background
         textbox.ForeColor <- colors.text
-        //textbox.Font <- System.Drawing.Font
-        //textbox.Font.S
-
-
-        textbox.Dock <- DockStyle.Fill
+        textbox.Font <- new System.Drawing.Font(Drawing.FontFamily.GenericMonospace, float32(11.), Drawing.FontStyle.Regular); 
+        //textbox.Font.S        
         textbox.BorderStyle <- BorderStyle.None
 
 
         // command bar
-        commandbar.BackColor <- colors.bar        
-        commandbar.Height <- 25
+        toolBar.BackColor <- colors.bar   
+        toolBar.Height <- 25
 
-        commandbar.Controls.Add cleanButton
+        toolBar.Controls.Add cleanButton
 
         // cleanbutton
         cleanButton.Text <- "Clear"

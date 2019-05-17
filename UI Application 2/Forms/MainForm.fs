@@ -17,6 +17,12 @@ type MainForm (config:settings.Settings) as this =
     inherit Form()
 
     let logPanel = new LogPanel()
+    //let toolBar = new ToolBar()
+    let toolBar = new Panel()
+    //let toolstrip = new ToolStrip()
+    let buyButton = new Button()
+
+    //let mutable trader:ITrader 
 
 
     let initializeTrader() = 
@@ -32,16 +38,18 @@ type MainForm (config:settings.Settings) as this =
 
 
         let trader = new FirstTrader(bitstampClient) :> ITrader
-        trader.log.Add (fun log -> logPanel.AddText log )
-        trader.start()
+        trader.log.Add (fun log -> logPanel.AddText log )        
+        trader
 
 
     do 
         this.SuspendLayout();
 
+
         this.BackColor <- colors.background
         this.Text <- "Auto Crypto Trader"
-        this.MinimumSize <- Size(600, 400)
+        this.MinimumSize <- Size(1024, 800)
+        this.Size <- this.MinimumSize
         
         //var exe = System.Reflection.Assembly.GetExecutingAssembly();
         //var iconStream = exe.GetManifestResourceStream("Namespace.IconName.ico");
@@ -51,22 +59,41 @@ type MainForm (config:settings.Settings) as this =
 
         // add LogPanel     
         this.Controls.Add logPanel
-        logPanel.Dock <- DockStyle.Fill
+        logPanel.Dock <- DockStyle.Fill  // "Dock=Fill" must be always the first one
         logPanel.SetText "Start"
 
 
+        // Toolbar
+        //this.Controls.Add toolBar
+        ////toolBar.Dock <- DockStyle.Top
+        //toolBar.BackColor <- colors.bar
+        //toolBar.Appearance <- ToolBarAppearance.Flat
+        //toolBar.ButtonSize <- Size(200, 20)
 
-        initializeTrader()
+        //toolstrippanel.Controls.Add toolstrip
+        //toolstrip.Stretch <- true
+        //toolstrip.BackColor <- colors.bar
 
+        this.Controls.Add toolBar
+        toolBar.Dock <- DockStyle.Top
+        toolBar.BackColor <- colors.bar         
+        toolBar.Height <- 25
+
+        //toolBar.Anchor <- AnchorStyles.Top
+        toolBar.Controls.Add buyButton
+        buyButton.Text <- "BUY"
+        buyButton.BackColor <- colors.background
+        buyButton.ForeColor <- colors.text //buttonForeColor
+        buyButton.FlatStyle <- FlatStyle.Popup
+
+        
+
+
+        let trader = initializeTrader()
+        trader.start()
+        buyButton.Click.Add ( fun _ -> trader.buy() )
 
         this.ResumeLayout(false)
         this.PerformLayout()
         
-
-    
-
-
-
-
-
 
