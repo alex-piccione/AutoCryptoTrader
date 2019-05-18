@@ -12,12 +12,10 @@ type State =
 
 
 
-
 type FirstTrader(bitstampClient:Alex75.BitstampApiClient.IClient) as trader=
 
     let logEvent = new Event<string>() (* create the event *)    
     
-    //let state = new Event<string>()
     let mutable state = State.Idle
     
     let amount = 1000
@@ -36,25 +34,24 @@ type FirstTrader(bitstampClient:Alex75.BitstampApiClient.IClient) as trader=
 
     member __.readTicker() =
 
-        //let a = 11204
-        //for x in [a ..(a+100)] do
-        //    logEvent.Trigger (sprintf "%i = %c" x (char(x)))
+        try
+            let ticker = bitstampClient.GetTicker( mainCurrency, baseCurrency)
+            let spread = ticker.Ask - ticker.Bid
+            let spreadPerc = (spread / ticker.Bid)*100m
 
-        let ticker = bitstampClient.GetTicker( mainCurrency, baseCurrency)
-        let spread = ticker.Ask - ticker.Bid
-        let spreadPerc = (spread / ticker.Bid)*100m
+            // https://www.key-shortcut.com/en/writing-systems/35-symbols/arrows/
 
-        // https://www.key-shortcut.com/en/writing-systems/35-symbols/arrows/
+            let bidArrow = match (ticker.Bid > previousBid)  with 
+                                | true -> char(11105)  // 11201
+                                | _ -> char(11107)  // 11206
+            logEvent.Trigger (sprintf"%O/%O  Bid:%f Ask:%f Spread:%.5f (%.3f %%) %c" mainCurrency baseCurrency ticker.Bid ticker.Ask spread spreadPerc bidArrow)
 
-        let bidArrow = match (ticker.Bid > previousBid)  with 
-                            | true -> char(11105)  // 11201
-                            | _ -> char(11107)  // 11206
-        logEvent.Trigger (sprintf"%O/%O  Bid:%f Ask:%f Spread:%.5f (%.3f %%) %c" mainCurrency baseCurrency ticker.Bid ticker.Ask spread spreadPerc bidArrow)
+            if spreadPerc > minProfitPercentage then
+                logEvent.Trigger(char(9989).ToString())
 
-        if spreadPerc > minProfitPercentage then
-            logEvent.Trigger(char(9989).ToString())
+            previousBid <- ticker.Bid
 
-        previousBid <- ticker.Bid
+        with e -> ()
 
 
     member trader.executeSell(amount:float, mainCurrency:Currency, baseCurrency:Currency, sellPrice:float) =           
