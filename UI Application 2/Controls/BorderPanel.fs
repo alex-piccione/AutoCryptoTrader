@@ -31,5 +31,4 @@ type BorderPanel(color:Color) as panel =
         innerPanel.Controls.Add control
 
     member panel.InnerPadding 
-    //   with set value = ()
         with set value = innerPanel.Padding <- value

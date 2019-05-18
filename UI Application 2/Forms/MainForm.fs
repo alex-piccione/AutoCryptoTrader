@@ -20,17 +20,10 @@ type MainForm (config:settings.Settings, engine:Engine) as this =
     inherit Form()
 
     let mainPanel = new Panel()
-
     let logPanel = new LogPanel()
-    //let toolBar = new ToolBar()
-    let toolBar = new Panel()
-    //let toolstrip = new ToolStrip()
+    let toolBar = new FlowLayoutPanel()
     let buyButton = new Button()
-
     let bitstampPanel = new BitstampPanel(engine)
-
-    //let mutable trader:ITrader 
-
 
     let initializeTrader() = 
 
@@ -51,18 +44,18 @@ type MainForm (config:settings.Settings, engine:Engine) as this =
 
         let fonts = new PrivateFontCollection()
         fonts.AddFontFile("fonts/consola.ttf")
-        this.Font <- new Font(fonts.Families.[0], float32(10.), Drawing.FontStyle.Regular)
-        //this.Font <- new System.Drawing.Font(Drawing.FontFamily.GenericSerif, float32(11.), Drawing.FontStyle.Regular);      
+        this.Font <- new Font(fonts.Families.[0], float32(10.), Drawing.FontStyle.Regular)    
         ()
 
     do 
         this.SuspendLayout();
                      
-        this.BackColor <- colors.background
         this.Text <- "Auto Crypto Trader"
         this.MinimumSize <- Size(1024, 800)
         this.Size <- this.MinimumSize
         
+        this.BackColor <- colors.background
+        this.ForeColor <- colors.text
         setFont()        
 
         //var exe = System.Reflection.Assembly.GetExecutingAssembly()
@@ -81,7 +74,6 @@ type MainForm (config:settings.Settings, engine:Engine) as this =
         logPanel.Dock <- DockStyle.Fill  // "Dock=Fill" must be always the first one
         logPanel.DockPadding.Top <- 10
         logPanel.SetText "Start"
-        //logPanel.Anchor <- AnchorStyles.Left ||| AnchorStyles.Right
 
 
         // Bitstamp panel
@@ -98,6 +90,7 @@ type MainForm (config:settings.Settings, engine:Engine) as this =
 
         // toolbar
         this.Controls.Add toolBar
+        toolBar.FlowDirection <- FlowDirection.LeftToRight
         toolBar.Dock <- DockStyle.Top
         toolBar.BackColor <- colors.bar         
         toolBar.Height <- 25
@@ -107,9 +100,9 @@ type MainForm (config:settings.Settings, engine:Engine) as this =
         buyButton.Text <- "BUY"
         buyButton.BackColor <- colors.background
         buyButton.ForeColor <- colors.text //buttonForeColor
-        buyButton.FlatStyle <- FlatStyle.Popup
+        buyButton.FlatStyle <- FlatStyle.Popup        
 
-        
+        this.AddCurrencies()
 
 
         let trader = initializeTrader()
@@ -119,3 +112,16 @@ type MainForm (config:settings.Settings, engine:Engine) as this =
         this.ResumeLayout(true)
         
 
+    member this.AddCurrencies() =
+
+        let xrp_usd = new CheckBox()
+        xrp_usd.Checked <- true
+        xrp_usd.Text <- "XRP/USD"
+        toolBar.Controls.Add (xrp_usd)
+        xrp_usd.Click.Add(fun _ ->  logPanel.AddText(xrp_usd.Text))
+
+        let xrp_eur = new CheckBox()
+        xrp_eur.Checked <- true
+        xrp_eur.Text <- "XRP/USD"
+        toolBar.Controls.Add (xrp_eur)
+        xrp_eur.Click.Add(fun _ ->  logPanel.AddText(xrp_eur.Text))

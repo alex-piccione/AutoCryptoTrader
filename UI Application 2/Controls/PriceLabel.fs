@@ -1,30 +1,36 @@
 ﻿module controls.priceLabel
 
+open System
 open System.Windows.Forms
 
 
-let unchanged = char(9552).ToString() 
-let up = char(9651).ToString() 
+let unchanged = char(9726).ToString() // 9675 // 9670
+let up = char(9651).ToString()   // 9652, 9653
 let UP = char(9650).ToString() 
-let down = char(9661).ToString() 
+let down = char(9661).ToString() // 9662, 9663
 let DOWN = char(9660).ToString() 
 
-type PriceLabel() as label =
-
+type PriceLabel(currency) as label=
     inherit Label()
 
     let mutable price:decimal option = None
 
+    do 
+        label.Text <- currency + " ... "
+
     member label.Price 
         with get() = price
-        and set (new_value:decimal option) = 
-            if new_value.IsNone then label.Text <- "--.--"
-            else 
-                 if price.IsSome then                     
-                        match new_value.Value.CompareTo(price.Value) with
-                            | 1 -> label.Text <- sprintf "%f %s" new_value.Value UP
-                            | -1 -> label.Text <- sprintf "%f %s" new_value.Value DOWN
-                            | _ -> label.Text <- sprintf "%f %s" new_value.Value unchanged
-                
+        and set (new_value:decimal option) =        
+            
+            let mutable text = "---"            
 
+            if new_value.IsNone then text <- ""
+            else 
+                if price.IsSome then                     
+                    match new_value.Value.CompareTo(price.Value) with
+                    |  1 -> text <- sprintf "%s %f %s" currency new_value.Value UP
+                    | -1 -> text <- sprintf "%s %f %s" currency new_value.Value DOWN
+                    |  _ -> text <- sprintf "%s %f %s" currency new_value.Value unchanged            
+            
+            label.Invoke( new Action( fun() -> label.Text <- text; label.ResumeLayout(true) )) |> ignore
             price <- new_value

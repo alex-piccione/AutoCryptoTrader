@@ -38,7 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Alex75.Cryptocurrencies" Version="0.1.8.7" />
+    <PackageReference Include="Alex75.Cryptocurrencies" Version="0.1.8.9" />
     <PackageReference Include="FSharp.Charting" Version="2.1.0" />
     <PackageReference Include="FSharp.Configuration" Version="1.5.0" />
     <ProjectReference Include="..\Core\Core.fsproj" />

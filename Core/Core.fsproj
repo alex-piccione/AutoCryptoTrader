@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Alex75.BitstampApiClient" Version="0.4.1.15" />
+    <PackageReference Include="Alex75.BitstampApiClient" Version="0.5.3.3" />
     <PackageReference Include="log4net" Version="2.0.8" />
   </ItemGroup>
 

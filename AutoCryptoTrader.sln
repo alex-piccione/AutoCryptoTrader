@@ -14,10 +14,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "UI App", "UI App\UI App\UI App.fsproj", "{A454E4A4-02AE-4AA6-BC1B-911ADC32E3CE}"
-EndProject
-Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "UI App.Desktop", "UI App\UI App.Desktop\UI App.Desktop.fsproj", "{CFB2E68B-40A3-42B7-B879-DEA2FF6A5CAC}"
-EndProject
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Desktop Application", "UI Application 2\Desktop Application.fsproj", "{B4EF0E4A-575C-49EA-9D7B-5141D84F6D07}"
 EndProject
 Global
@@ -34,14 +30,6 @@ Global
 		{956E800A-E142-4736-B07B-8ABC51E583C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{956E800A-E142-4736-B07B-8ABC51E583C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{956E800A-E142-4736-B07B-8ABC51E583C1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A454E4A4-02AE-4AA6-BC1B-911ADC32E3CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A454E4A4-02AE-4AA6-BC1B-911ADC32E3CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A454E4A4-02AE-4AA6-BC1B-911ADC32E3CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A454E4A4-02AE-4AA6-BC1B-911ADC32E3CE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CFB2E68B-40A3-42B7-B879-DEA2FF6A5CAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CFB2E68B-40A3-42B7-B879-DEA2FF6A5CAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CFB2E68B-40A3-42B7-B879-DEA2FF6A5CAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CFB2E68B-40A3-42B7-B879-DEA2FF6A5CAC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B4EF0E4A-575C-49EA-9D7B-5141D84F6D07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B4EF0E4A-575C-49EA-9D7B-5141D84F6D07}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4EF0E4A-575C-49EA-9D7B-5141D84F6D07}.Release|Any CPU.ActiveCfg = Release|Any CPU
