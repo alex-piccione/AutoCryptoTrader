@@ -11,7 +11,22 @@
     <None Include="settings.yaml" />
     <Compile Include="settings.fs" />
     <Compile Include="colors.fs" />
-    <Compile Include="Panels\LogPanel.fs" />
+    <Compile Include="Engine.fs" />
+    <Content Include="fonts\ARIALUNI.TTF" />
+    <Content Include="fonts\consola.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fonts\consolab.ttf" />
+    <Content Include="fonts\consolai.ttf" />
+    <Content Include="fonts\consolaz.ttf" />
+    <Content Include="images\001.jpg" />
+    <Content Include="images\104536575-stock-market-logo-simple-up-and-down-arrows-upward-downward-arrows-in-green-and-red-isolated-on-whit.jpg" />
+    <Content Include="images\94638279-arrows-up-and-down-green-and-red-icons.jpg" />
+    <Content Include="images\up-or-down-_400.jpg" />
+    <Compile Include="Controls\BorderPanel.fs" />
+    <Compile Include="Controls\PriceLabel.fs" />
+    <Compile Include="Panels\Bitstamp Panel.fs" />
+    <Compile Include="Panels\Log Panel.fs" />
     <Compile Include="Forms\MainForm.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
@@ -23,6 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Alex75.Cryptocurrencies" Version="0.1.8.7" />
     <PackageReference Include="FSharp.Charting" Version="2.1.0" />
     <PackageReference Include="FSharp.Configuration" Version="1.5.0" />
     <ProjectReference Include="..\Core\Core.fsproj" />
