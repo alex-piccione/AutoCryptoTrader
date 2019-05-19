@@ -48,3 +48,4 @@ type Engine(bitstampClient: IClient) =
         
         
     member __.BitstampTickerChanged = bitstampTickerChanged.Publish
+    member __.BitstampBalanceUpdated = bitstampBalanceUpdated.Publish
