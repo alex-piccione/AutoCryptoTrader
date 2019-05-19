@@ -54,6 +54,19 @@ type FirstTrader(bitstampClient:Alex75.BitstampApiClient.IClient) as trader=
         with e -> ()
 
 
+    member trader.executeBuy(amount:float, mainCurrency:Currency, baseCurrency:Currency, buyPrice:float) =           
+
+        let doBuy() = 
+            let buyOrder = bitstampClient.CreateBuyLimitOrder(float(amount), mainCurrency, baseCurrency, float(buyPrice), false)
+            if buyOrder.IsSuccess then
+                logEvent.Trigger(sprintf "Buy order created. Id: %i Price:%f " buyOrder.Id buyOrder.Price)
+            else 
+                logEvent.Trigger(sprintf "ERROR. Buy order failed. %s" buyOrder.ErrorReason)     
+            buyOrder
+
+        retryer.execute doBuy 5
+
+
     member trader.executeSell(amount:float, mainCurrency:Currency, baseCurrency:Currency, sellPrice:float) =           
 
         let doSell() = 
@@ -62,6 +75,7 @@ type FirstTrader(bitstampClient:Alex75.BitstampApiClient.IClient) as trader=
                 logEvent.Trigger(sprintf "Sell order created. Id: %i Price:%f " sellOrder.Id sellOrder.Price)
             else 
                 logEvent.Trigger(sprintf "ERROR. Sell order failed. %s" sellOrder.ErrorReason)     
+            sellOrder
 
         retryer.execute doSell 5
         
@@ -75,8 +89,7 @@ type FirstTrader(bitstampClient:Alex75.BitstampApiClient.IClient) as trader=
             try         
                 let balance = bitstampClient.GetBalance() 
                 logEvent.Trigger (sprintf"XRP: %f USD: %f" balance.XRP balance.USD)
-            with
-                | _Exception as ex -> logEvent.Trigger(ex.ToString())                           
+            with e -> logEvent.Trigger( "Failed to get balance. " + e.ToString())                           
 
 
 
@@ -102,10 +115,17 @@ type FirstTrader(bitstampClient:Alex75.BitstampApiClient.IClient) as trader=
             let sellPrice = buyPrice * (1m + minProfitPercentage / 100m);
 
 
-            let buyOrder = bitstampClient.CreateBuyLimitOrder(float(amount), mainCurrency, baseCurrency, float(buyPrice), false) 
+
+            //let buyOrder = bitstampClient.CreateBuyLimitOrder(float(amount), mainCurrency, baseCurrency, float(buyPrice), false) 
+            let buyOrder = trader.executeBuy(float(amount), mainCurrency, baseCurrency, float(buyPrice))
+            
             if buyOrder.IsSuccess then
                 logEvent.Trigger(sprintf "Buy order created. Id: %i Price:%f " buyOrder.Id buyOrder.Price )
 
-                trader.executeSell(float(amount), mainCurrency, baseCurrency, float(sellPrice))
+                let sellOrder = trader.executeSell(float(amount), mainCurrency, baseCurrency, float(sellPrice))
+                if sellOrder.IsSuccess then
+                    logEvent.Trigger(sprintf "Sell order created. Id: %i Price:%f " sellOrder.Id sellOrder.Price )
+                else
+                    logEvent.Trigger(sprintf "ERROR. Sell order failed. %s" sellOrder.ErrorReason)
             else
                 logEvent.Trigger(sprintf "ERROR. Buy order failed. %s" buyOrder.ErrorReason)

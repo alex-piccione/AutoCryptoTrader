@@ -24,10 +24,10 @@ type Engine(bitstampClient: IClient) =
         Parallel.ForEach(tickers.Values, fun ticker -> bitstampTickerChanged.Trigger(ticker) ) |> ignore 
 
     
-    do
+    member __.startUpdatingUI () =
         let timer = new Timer( fun _ -> updatePrices() )
         timer.Change(0, 5000 ) |> ignore
-        //state <- State.Idle
-
-
+        
+        
+        
     member __.BitstampTickerChanged = bitstampTickerChanged.Publish

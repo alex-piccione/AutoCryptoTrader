@@ -30,7 +30,9 @@ let main argv =
 
 
     use form = new MainForm(configuration, engine)
-
+    // to avoid the error "Invoke or BeginInvoke cannot be called on a control until the window handle has been created"
+    // when try to update labels
+    form.HandleCreated.Add(fun _ -> engine.startUpdatingUI() )
          
 
     Application.Run(form)

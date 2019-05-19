@@ -104,12 +104,13 @@ type MainForm (config:settings.Settings, engine:Engine) as this =
 
         this.AddCurrencies()
 
+        this.ResumeLayout(true)
+
 
         let trader = initializeTrader()
         trader.start()
         buyButton.Click.Add ( fun _ -> trader.buy() )
 
-        this.ResumeLayout(true)
         
 
     member this.AddCurrencies() =
