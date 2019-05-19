@@ -3,9 +3,10 @@
 open System
 open System.Windows.Forms
 
-open Alex75.BitstampApiClient
-open AutoCryptoTrader.DesktopApplication.Forms
 open engine
+open Alex75.BitstampApiClient
+open Alex75.BinanceApiClient
+open AutoCryptoTrader.DesktopApplication.Forms
 
 
 [<EntryPoint>]
@@ -16,7 +17,7 @@ let main argv =
     Application.SetCompatibleTextRenderingDefault false
 
     
-    let configuration = settings.Settings()
+    let configuration = settings.AppSettings()
 
     let bitstampConfig = { 
         TickerCacheDuration=TimeSpan.FromSeconds(float(configuration.Bitstamp.``ticker cache``));
@@ -24,9 +25,15 @@ let main argv =
         PublicKey=configuration.Bitstamp.``public key``;
         SecretKey=configuration.Bitstamp.``secret key``;
         }
-    let bitstampClient = new Alex75.BitstampApiClient.Client(bitstampConfig) :> IClient
+    let bitstampClient = new Alex75.BitstampApiClient.Client(bitstampConfig) :> Alex75.BitstampApiClient.IClient
 
-    let engine = Engine(bitstampClient)
+    let binanceSettings = {
+        TickerCacheDuration=TimeSpan.FromSeconds(10.)
+        PublicKey=""
+        SecretKey=""}
+    let binanceClient = new Alex75.BinanceApiClient.Client(binanceSettings) :> Alex75.BinanceApiClient.IClient
+
+    let engine = Engine(bitstampClient, binanceClient)
 
 
     use form = new MainForm(configuration, engine)

@@ -25,6 +25,7 @@
     <Content Include="images\up-or-down-_400.jpg" />
     <Compile Include="Controls\BorderPanel.fs" />
     <Compile Include="Controls\PriceLabel.fs" />
+    <Compile Include="Panels\BinancePanel.fs" />
     <Compile Include="Panels\Bitstamp Panel.fs" />
     <Compile Include="Panels\Log Panel.fs" />
     <Compile Include="Forms\MainForm.fs" />
@@ -38,6 +39,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Alex75.BinanceApiClient" Version="0.1.20190519.3" />
     <PackageReference Include="Alex75.Cryptocurrencies" Version="0.1.8.9" />
     <PackageReference Include="FSharp.Charting" Version="2.1.0" />
     <PackageReference Include="FSharp.Configuration" Version="1.5.0" />

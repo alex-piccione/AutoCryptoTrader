@@ -3,20 +3,22 @@
 open System
 open System.Windows.Forms
 open System.Drawing
+open System.Drawing.Text
 
 open Alex75.BitstampApiClient
 open AutoCryptoTrader.Core
-open Panels.logPanel
 open engine
+open Panels.logPanel
 open Panels.bitstampPanel
-open System.Drawing.Text
+open panels.binancePanel
+
 
 
 // ref: https://www.codeproject.com/Articles/30414/Getting-Started-in-F-A-Windows-Forms-Application
 // https://blogs.msdn.microsoft.com/mcsuksoldev/2011/05/27/f-windows-application-template-for-winforms/
 // https://github.com/Acadian-Ambulance/vinyl-ui
 
-type MainForm (config:settings.Settings, engine:Engine) as this =
+type MainForm (config:settings.AppSettings, engine:Engine) as this =
     inherit Form()
 
     let mainPanel = new Panel()
@@ -24,6 +26,7 @@ type MainForm (config:settings.Settings, engine:Engine) as this =
     let toolBar = new FlowLayoutPanel()
     let buyButton = new Button()
     let bitstampPanel = new BitstampPanel(engine)
+    let binancePanel = new BinancePanel(engine)
 
     let initializeTrader() = 
 
@@ -78,7 +81,10 @@ type MainForm (config:settings.Settings, engine:Engine) as this =
 
         // Bitstamp panel
         mainPanel.Controls.Add bitstampPanel
-        bitstampPanel.Dock <- DockStyle.Top     
+        bitstampPanel.Dock <- DockStyle.Top   
+        
+        mainPanel.Controls.Add binancePanel
+        binancePanel.Dock <- DockStyle.Top
 
 
         // test
