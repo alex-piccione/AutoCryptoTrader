@@ -13,6 +13,9 @@ type Transaction = {
     When:DateTime
 }
 
+
+
+
 // example from
 // interface
 type IExchangeInterface = {
@@ -20,6 +23,7 @@ type IExchangeInterface = {
     CreateBuyOrder: MarketLimitOrder -> unit
     CreateSellOrder : MarketLimitOrder -> unit
     GetTransactions: DateTime -> DateTime -> seq<Transaction>
+    GetOpenOrders: Exchange -> seq<OpenOrder>
 }
 
 

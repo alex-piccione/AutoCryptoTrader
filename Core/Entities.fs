@@ -1,18 +1,29 @@
 ﻿module Entities
 
+open System
+open Alex75.Cryptocurrencies
 
-type Currency = {
-    Symbol:string
-    Name:string
-}
+
+
+type Exchange =
+    | Bitstamp
+    | Bitfinex
 
 /// Represent the price of currency AAA on currency BBB (AAA/BBB)
 type Price = { 
-    // the AAA of AAA/BBB
     MainCurrency:Currency
-    // the BBB in AAA/BBB
     BaseCurrency:Currency
-
     /// the value of MainCurrency / BaseCurrency
     Value: decimal
+}
+
+
+type OpenOrder = {
+    Exchange:Exchange
+    Date:DateTime
+    BuyCurrency: Currency
+    BuyAmount: decimal
+    PayCurrency: Currency
+    PayAmount: decimal
+    Price: decimal
 }

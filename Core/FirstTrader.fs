@@ -19,10 +19,12 @@ type FirstTrader(bitstampClient:Alex75.BitstampApiClient.IClient) as trader=
     let mutable state = State.Idle
     
     let amount = 1000
+    //let amount = 100    
     let mainCurrency = Currency.XRP
     let baseCurrency = Currency.EUR
+    //let baseCurrency = Currency.USD
 
-    let minProfitPercentage = 01.0m  // fee are 0.25% (for buy and sell become 0.50%)
+    let minProfitPercentage = 01.5m  // fee are 0.25% (for buy and sell become 0.50%)
     let mutable previousBid = 0m
 
     do        

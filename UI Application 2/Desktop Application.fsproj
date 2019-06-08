@@ -22,10 +22,12 @@
     <Content Include="images\001.jpg" />
     <Content Include="images\104536575-stock-market-logo-simple-up-and-down-arrows-upward-downward-arrows-in-green-and-red-isolated-on-whit.jpg" />
     <Content Include="images\94638279-arrows-up-and-down-green-and-red-icons.jpg" />
+    <Content Include="images\Bitstamp.png" />
     <Content Include="images\up-or-down-_400.jpg" />
     <Compile Include="Controls\BorderPanel.fs" />
     <Compile Include="Controls\PriceLabel.fs" />
-    <Compile Include="Panels\BinancePanel.fs" />
+    <Compile Include="Panels\Bitfinex Panel.fs" />
+    <Compile Include="Panels\Binance Panel.fs" />
     <Compile Include="Panels\Bitstamp Panel.fs" />
     <Compile Include="Panels\Log Panel.fs" />
     <Compile Include="Forms\MainForm.fs" />
@@ -40,7 +42,9 @@
 
   <ItemGroup>
     <PackageReference Include="Alex75.BinanceApiClient" Version="0.1.20190519.3" />
-    <PackageReference Include="Alex75.Cryptocurrencies" Version="0.1.8.9" />
+    <PackageReference Include="Alex75.BitfinexApiClient" Version="0.1.20190526.2" />
+    <PackageReference Include="Alex75.Cryptocurrencies" Version="0.1.8.14" />
+    <PackageReference Include="BaseBitfinex.csproj" Version="1.0.0" />
     <PackageReference Include="FSharp.Charting" Version="2.1.0" />
     <PackageReference Include="FSharp.Configuration" Version="1.5.0" />
     <ProjectReference Include="..\Core\Core.fsproj" />

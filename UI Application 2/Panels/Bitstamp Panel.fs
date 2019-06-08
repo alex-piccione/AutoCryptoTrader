@@ -1,6 +1,7 @@
 ﻿module Panels.bitstampPanel
 
 open System
+open System.Linq
 open System.Windows.Forms
 open System.Drawing
 open System.Collections.Generic
@@ -27,6 +28,10 @@ type BitstampPanel(engine:Engine) as panel =
     let xrp_balanceLabel = new Label()
     let usd_balanceLabel = new Label()
     let eur_balanceLabel = new Label()
+
+    let ordersPanel = new FlowLayoutPanel()
+    
+
 
     let priceHistory = Queue<decimal>(100)
 
@@ -74,6 +79,14 @@ type BitstampPanel(engine:Engine) as panel =
         balancePanel.Controls.Add eur_balanceLabel
         xrp_balanceLabel.AutoSize <- true
 
+
+        // Orders
+        mainPanel.Controls.Add ordersPanel
+        ordersPanel.FlowDirection <- FlowDirection.TopDown
+        //ordersPanel.BackColor <- colors.red  // for debug
+        ordersPanel.Width <- 400
+
+
         panel.ResumeLayout()
 
         engine.BitstampTickerChanged.Add(fun ticker -> 
@@ -85,13 +98,31 @@ type BitstampPanel(engine:Engine) as panel =
             | _ -> ()
         )
 
-        engine.BitstampBalanceUpdated.Add(fun balance ->
+        engine.BitstampBalanceChanged.Add(fun balance ->
             xrp_balanceLabel.Invoke( new Action( fun() -> xrp_balanceLabel.Text <- sprintf"XRP %i" balance.XRP)) |> ignore
             usd_balanceLabel.Invoke( new Action( fun() -> usd_balanceLabel.Text <- sprintf"USD %i" balance.USD)) |> ignore
             eur_balanceLabel.Invoke( new Action( fun() -> eur_balanceLabel.Text <- sprintf"EUR %i" balance.EUR)) |> ignore
         )
 
+        engine.BitstampOrdersChanged.Add( fun orders ->            
+            ordersPanel.Invoke(new Action(fun _ -> 
+                    ordersPanel.SuspendLayout()
+                    ordersPanel.Controls.Clear()
+                    ordersPanel.WrapContents <- false
 
+                    for order in orders do
+                        let label = new Label()
+                        let date = order.Date.ToShortDateString()
+                        let side = order.Side.ToString().ToUpper()
+                        let quantity = order.Amount.ToString("n0").PadLeft(6, ' ')
+                        label.Text <- sprintf "%s %s %s %s -> %s @ %O" date side quantity order.CurrencyPair.Main.UpperCase  order.CurrencyPair.Other.UpperCase order.Price
+                        label.Width <- 400
+                        label.ForeColor <- if order.Side = OrderSide.Buy then colors.green else colors.red
+                        ordersPanel.Controls.Add (label)
+
+                    ordersPanel.ResumeLayout()
+            )) |> ignore            
+        )
 
     member __.priceChanged (ticker:Ticker, label:PriceLabel) = 
         //priceHistory.Enqueue priceChange.price
@@ -99,3 +130,7 @@ type BitstampPanel(engine:Engine) as panel =
             let newPrice = if ticker.Last.IsSome then ticker.Last.Value else ticker.Ask
             label.Invoke( new Action( fun() -> label.Price <- Some(newPrice) )) |> ignore
         with e -> label.Invoke( new Action( fun() -> label.Text <- "error" )) |> ignore
+
+
+
+        
