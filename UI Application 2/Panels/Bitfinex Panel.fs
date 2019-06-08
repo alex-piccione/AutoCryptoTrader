@@ -20,14 +20,9 @@ type BitfinexPanel(engine:Engine) as panel =
 
     let pricePanel = new FlowLayoutPanel()
     let xrp_usdLabel = new PriceLabel("XRP/USD")
-    let xrp_eurLabel = new PriceLabel("XRP/EUR")
+    //let xrp_eurLabel = new PriceLabel("XRP/EUR")
     let xrp_btcLabel = new PriceLabel("XRP/BTC")
-    let xrp_ethLabel = new PriceLabel("XRP/ETH")
-
-    //let balancePanel = new FlowLayoutPanel()
-    //let xrp_balanceLabel = new Label()
-    //let usd_balanceLabel = new Label()
-    //let eur_balanceLabel = new Label()
+    //let xrp_ethLabel = new PriceLabel("XRP/ETH")
 
     let priceHistory = Queue<decimal>(100)
 
@@ -51,19 +46,12 @@ type BitfinexPanel(engine:Engine) as panel =
         mainPanel.Controls.Add pricePanel
         pricePanel.FlowDirection <- FlowDirection.TopDown
         pricePanel.Controls.Add xrp_usdLabel
-        pricePanel.Controls.Add xrp_eurLabel
+        //pricePanel.Controls.Add xrp_eurLabel
         pricePanel.Controls.Add xrp_btcLabel
-        pricePanel.Controls.Add xrp_ethLabel
+        //pricePanel.Controls.Add xrp_ethLabel
         
-        xrp_usdLabel.AutoSize <- true
-        xrp_eurLabel.AutoSize <- true
-        xrp_btcLabel.AutoSize <- true
-        xrp_ethLabel.AutoSize <- true
-        //xrp_usdLabel.BackColor <- colors.bar
-        //xrp_eurLabel.BackColor <- colors.bar
-        //pricePanel.Width <- 200
-        //xrp_eurLabel.AutoSize <- true
-        //xrp_eurLabel.Width <- 200
+
+
 
         //pricePanel.BackColor <- colors.red  //xtest
         //xrp_usdLabel.ForeColor <- colors.text     
@@ -75,16 +63,15 @@ type BitfinexPanel(engine:Engine) as panel =
         //balancePanel.Controls.Add xrp_balanceLabel
         //balancePanel.Controls.Add usd_balanceLabel
         //balancePanel.Controls.Add eur_balanceLabel
-        //xrp_balanceLabel.AutoSize <- true
 
         panel.ResumeLayout()
 
         engine.BitfinexTickerChanged.Add(fun ticker -> 
             match ticker.Currencies with 
             | p when p = CurrencyPair.XRP_USD -> panel.priceChanged(ticker, xrp_usdLabel)
-            | p when p = CurrencyPair.XRP_EUR -> panel.priceChanged(ticker, xrp_eurLabel)
+            //| p when p = CurrencyPair.XRP_EUR -> panel.priceChanged(ticker, xrp_eurLabel)
             | p when p = CurrencyPair.XRP_BTC -> panel.priceChanged(ticker, xrp_btcLabel)
-            | p when p = CurrencyPair.XRP_ETH -> panel.priceChanged(ticker, xrp_ethLabel)
+            //| p when p = CurrencyPair.XRP_ETH -> panel.priceChanged(ticker, xrp_ethLabel)
             //| (:? Currency("xrp") as a), (:? Currency.EUR as b) -> panel.priceChanged(ticker, xrp_eurLabel)
             | _ -> ()
         )

@@ -17,6 +17,7 @@ type PriceLabel(currency) as label=
 
     do 
         label.Text <- currency + " ... "
+        label.AutoSize <- true
 
     member label.Price 
         with get() = price
@@ -28,9 +29,9 @@ type PriceLabel(currency) as label=
             else 
                 if price.IsSome then                     
                     match new_value.Value.CompareTo(price.Value) with
-                    |  1 -> text <- sprintf "%s %f %s" currency new_value.Value UP
-                    | -1 -> text <- sprintf "%s %f %s" currency new_value.Value DOWN
-                    |  _ -> text <- sprintf "%s %f %s" currency new_value.Value unchanged            
+                    |  1 -> text <- sprintf "%s %.8f %s" currency new_value.Value UP
+                    | -1 -> text <- sprintf "%s %.8f %s" currency new_value.Value DOWN
+                    |  _ -> text <- sprintf "%s %.8f %s" currency new_value.Value unchanged            
             
             label.Invoke( new Action( fun() -> label.Text <- text; label.ResumeLayout(true) )) |> ignore
             price <- new_value

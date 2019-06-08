@@ -103,7 +103,7 @@ type Engine(bitstampClient: Alex75.BitstampApiClient.IClient,
     
     member __.startUpdatingUI () =
         let timer = new Timer( fun _ -> updatePrices() )
-        timer.Change(0, 5000 ) |> ignore
+        timer.Change(2000, 5000 ) |> ignore
 
         let timer_Balance = new Timer( fun _ -> updateBalance() )
         timer_Balance.Change(2000, 30*1000) |> ignore

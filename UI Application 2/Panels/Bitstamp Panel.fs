@@ -89,6 +89,7 @@ type BitstampPanel(engine:Engine) as panel =
 
         panel.ResumeLayout()
 
+
         engine.BitstampTickerChanged.Add(fun ticker -> 
             match ticker.Currencies with 
             | p when p = CurrencyPair.XRP_USD -> panel.priceChanged(ticker, xrp_usdLabel)

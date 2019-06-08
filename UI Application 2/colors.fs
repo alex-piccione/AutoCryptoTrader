@@ -10,6 +10,7 @@ let bar = Color.FromArgb(059,059,059)
 
 let red = Color.FromArgb(255,000,000)
 let green = Color.FromArgb(000,255,000)
+let yellow = Color.FromArgb(255,211,000)
 
 let Bitstamp_bg = Color.FromArgb(021, 158, 073)
 let Bitstamp_fg = Color.FromArgb(250, 250, 250)

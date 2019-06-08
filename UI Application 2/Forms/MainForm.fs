@@ -9,6 +9,7 @@ open Alex75.BitstampApiClient
 open AutoCryptoTrader.Core
 open engine
 open Panels.logPanel
+open panels.PricesComparisonPanel
 open Panels.bitstampPanel
 open panels.binancePanel
 open panels.bitfinexPanel
@@ -23,9 +24,11 @@ type MainForm (config:settings.AppSettings, engine:Engine) as this =
     inherit Form()
 
     let mainPanel = new Panel()
+    
     let logPanel = new LogPanel()
     let toolBar = new FlowLayoutPanel()
     let buyButton = new Button()
+    let pricesComparisonPanel = new PricesComparisonPanel(engine)
     let bitstampPanel = new BitstampPanel(engine)
     let binancePanel = new BinancePanel(engine)
     let bitfinexPanel = new BitfinexPanel(engine)
@@ -74,10 +77,15 @@ type MainForm (config:settings.AppSettings, engine:Engine) as this =
         mainPanel.Dock <- DockStyle.Fill        
 
 
+        // Prices Comparison
+        mainPanel.Controls.Add pricesComparisonPanel
+        pricesComparisonPanel.Dock <- DockStyle.Fill 
+
         // LogPanel     
         mainPanel.Controls.Add logPanel
-        logPanel.Dock <- DockStyle.Fill  // "Dock=Fill" must be always the first one
+        logPanel.Dock <- DockStyle.Bottom  // "Dock=Fill" must be always the first one
         logPanel.DockPadding.Top <- 10
+        logPanel.MinimumSize <- Size(400, 200)
         logPanel.SetText "Start"
 
 

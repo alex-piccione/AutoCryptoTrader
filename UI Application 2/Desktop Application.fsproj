@@ -9,8 +9,9 @@
 
   <ItemGroup>
     <None Include="settings.yaml" />
-    <Compile Include="settings.fs" />
     <Compile Include="colors.fs" />
+    <Compile Include="Controls\ThresholdLabel.fs" />
+    <Compile Include="settings.fs" />
     <Compile Include="Engine.fs" />
     <Content Include="fonts\ARIALUNI.TTF" />
     <Content Include="fonts\consola.ttf">
@@ -24,12 +25,14 @@
     <Content Include="images\94638279-arrows-up-and-down-green-and-red-icons.jpg" />
     <Content Include="images\Bitstamp.png" />
     <Content Include="images\up-or-down-_400.jpg" />
+    <Compile Include="Controls\TextLabel.fs" />
     <Compile Include="Controls\BorderPanel.fs" />
     <Compile Include="Controls\PriceLabel.fs" />
+    <Compile Include="Panels\Log Panel.fs" />
+    <Compile Include="Panels\PriceDifferencePanel.fs" />
     <Compile Include="Panels\Bitfinex Panel.fs" />
     <Compile Include="Panels\Binance Panel.fs" />
     <Compile Include="Panels\Bitstamp Panel.fs" />
-    <Compile Include="Panels\Log Panel.fs" />
     <Compile Include="Forms\MainForm.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
