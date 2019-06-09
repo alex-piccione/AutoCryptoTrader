@@ -20,6 +20,7 @@
     <Content Include="fonts\consolab.ttf" />
     <Content Include="fonts\consolai.ttf" />
     <Content Include="fonts\consolaz.ttf" />
+    <Compile Include="ValuesCollector.fs" />
     <Content Include="images\001.jpg" />
     <Content Include="images\104536575-stock-market-logo-simple-up-and-down-arrows-upward-downward-arrows-in-green-and-red-isolated-on-whit.jpg" />
     <Content Include="images\94638279-arrows-up-and-down-green-and-red-icons.jpg" />
@@ -29,7 +30,7 @@
     <Compile Include="Controls\BorderPanel.fs" />
     <Compile Include="Controls\PriceLabel.fs" />
     <Compile Include="Panels\Log Panel.fs" />
-    <Compile Include="Panels\PriceDifferencePanel.fs" />
+    <Compile Include="Panels\PriceComparisonPanel.fs" />
     <Compile Include="Panels\Bitfinex Panel.fs" />
     <Compile Include="Panels\Binance Panel.fs" />
     <Compile Include="Panels\Bitstamp Panel.fs" />

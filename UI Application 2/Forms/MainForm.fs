@@ -33,6 +33,9 @@ type MainForm (config:settings.AppSettings, engine:Engine) as this =
     let binancePanel = new BinancePanel(engine)
     let bitfinexPanel = new BitfinexPanel(engine)
 
+    let oldFont = this.Font
+    
+
     let initializeTrader() = 
 
         let bitstampConfig = { 
@@ -52,6 +55,7 @@ type MainForm (config:settings.AppSettings, engine:Engine) as this =
 
         let fonts = new PrivateFontCollection()
         fonts.AddFontFile("fonts/consola.ttf")
+        // This breaks FSharp.Charting with "Parameter not valid"
         this.Font <- new Font(fonts.Families.[0], float32(10.), Drawing.FontStyle.Regular)    
         ()
 
@@ -133,7 +137,7 @@ type MainForm (config:settings.AppSettings, engine:Engine) as this =
             //()
         )
 
-        
+    member this.OriginalFont with get() = oldFont
 
     member this.AddCurrencies() =
 

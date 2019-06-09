@@ -6,6 +6,10 @@ open Alex75.Cryptocurrencies
 open engine
 open controls.TextLabel
 open controls.ThresholdLabel
+open timeValuesCollector
+open FSharp.Charting.ChartTypes
+open FSharp.Charting
+open System.Drawing
 
 
 type PricesComparisonPanel(engine:Engine) as panel =
@@ -22,7 +26,6 @@ type PricesComparisonPanel(engine:Engine) as panel =
     let mutable xrpusd_bitfinex_price = 0m
     let mutable xrpeur_bitfinex_price = 0m
     let mutable xrpbtc_bitfinex_price = 0m
-
     
 
     let xrpusd_Bitstamp_Binance_diffLabel = new TextLabel("")
@@ -37,6 +40,16 @@ type PricesComparisonPanel(engine:Engine) as panel =
     let xrpbtc_Binance_Bitfinex_diffLabel = new ThresholdLabel(0.2m, true, print_percent)
 
     let table = new TableLayoutPanel()
+
+    //let chart_1 = new FSharp.Charting.Chart.Line([1..3])
+    let chart_1 = [for x in 0.0 .. 0.1 .. 6.0 -> sin x + cos (2.0 * x)]
+                    |> Chart.Line |> Chart.WithYAxis(Title="Test")
+    let chartControl = new ChartControl(chart_1)
+
+
+    let xrp_btc_bitstamp_collection = new TimeValuesCollector<decimal>()
+    let xrp_btc_binance_collection = new TimeValuesCollector<decimal>()
+    let xrp_btc_bitfinex_collection = new TimeValuesCollector<decimal>()
 
     do 
         panel.SuspendLayout()
@@ -72,6 +85,12 @@ type PricesComparisonPanel(engine:Engine) as panel =
         table.Controls.Add(xrpbtc_Bitstamp_Bitfinex_diffLabel, 3,2)
         table.Controls.Add(xrpbtc_Binance_Bitfinex_diffLabel, 3,3)      
 
+        panel.Font <- new Font(new FontFamily("Arial"), 10.0f)
+        panel.Controls.Add chartControl
+        chartControl.Dock <- DockStyle.Fill
+        chartControl.MaximumSize <- new Size(500, 200)
+        let a:float32 = 10.0f
+        chartControl.Font <- new Font("Arial", 10.0f) //FontFamily.GenericSansSerif, a,  FontStyle.Regular)
 
         panel.ResumeLayout()
 
@@ -80,8 +99,11 @@ type PricesComparisonPanel(engine:Engine) as panel =
             | p when p = CurrencyPair.XRP_USD -> xrpusd_bitstamp_price <- ticker.Last.Value
             | p when p = CurrencyPair.XRP_EUR -> xrpeur_bitstamp_price <- ticker.Last.Value
             | p when p = CurrencyPair.XRP_BTC -> xrpbtc_bitstamp_price <- ticker.Last.Value
+                                                 xrp_btc_bitstamp_collection.AddValue(ticker.Last.Value)
             | _ -> ()
             panel.calculateDifference()
+
+            
         )
 
         engine.BinanceTickerChanged.Add (fun ticker -> 
@@ -89,6 +111,7 @@ type PricesComparisonPanel(engine:Engine) as panel =
             | p when p = CurrencyPair.XRP_USD -> xrpusd_binance_price <- ticker.Last.Value
             | p when p = CurrencyPair.XRP_EUR -> xrpeur_binance_price <- ticker.Last.Value
             | p when p = CurrencyPair.XRP_BTC -> xrpbtc_binance_price <- ticker.Last.Value
+                                                 xrp_btc_binance_collection.AddValue(ticker.Last.Value)
             | _ -> ()
             panel.calculateDifference()
         )
@@ -98,6 +121,7 @@ type PricesComparisonPanel(engine:Engine) as panel =
             | p when p = CurrencyPair.XRP_USD -> xrpusd_bitfinex_price <- ticker.Last.Value
             | p when p = CurrencyPair.XRP_EUR -> xrpeur_bitfinex_price <- ticker.Last.Value
             | p when p = CurrencyPair.XRP_BTC -> xrpbtc_bitfinex_price <- ticker.Last.Value
+                                                 xrp_btc_bitfinex_collection.AddValue(ticker.Last.Value)
             | _ -> ()
             panel.calculateDifference()
         )
@@ -111,10 +135,9 @@ type PricesComparisonPanel(engine:Engine) as panel =
         // todo: this is called when window handle is not yet initialized
 
         let calculateDiffPercentage price_a price_b = 
-            let v =
-                if price_a = 0m || price_b = 0m then 0m
-                else ( (price_a - price_b) / max price_a price_b ) * 100m            
-            v
+            if price_a = 0m || price_b = 0m then 0m
+            else ( (price_a - price_b) / max price_a price_b ) * 100m            
+            
 
         // XRP/USD       
         // Bitstamp / Binance
@@ -126,7 +149,7 @@ type PricesComparisonPanel(engine:Engine) as panel =
 
         // XRP/BTC      
         xrpbtc_Bitstamp_Binance_diffLabel.SetValue( calculateDiffPercentage xrpbtc_bitstamp_price xrpbtc_binance_price)                         
-        let value = calculateDiffPercentage xrpbtc_bitstamp_price xrpbtc_binance_price
-        //xrpbtc_Bitstamp_Binance_diffLabel.SetText( , 0.5m, "%")
         xrpbtc_Bitstamp_Bitfinex_diffLabel.SetValue( calculateDiffPercentage xrpbtc_bitstamp_price xrpbtc_bitfinex_price)
         xrpbtc_Binance_Bitfinex_diffLabel.SetValue( calculateDiffPercentage xrpbtc_binance_price xrpbtc_bitfinex_price)
+
+
