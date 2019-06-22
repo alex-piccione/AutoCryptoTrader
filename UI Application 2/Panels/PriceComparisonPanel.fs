@@ -7,6 +7,7 @@ open engine
 open controls.TextLabel
 open controls.ThresholdLabel
 open timeValuesCollector
+
 open FSharp.Charting.ChartTypes
 open FSharp.Charting
 open System.Drawing
@@ -41,10 +42,9 @@ type PricesComparisonPanel(engine:Engine) as panel =
 
     let table = new TableLayoutPanel()
 
-    //let chart_1 = new FSharp.Charting.Chart.Line([1..3])
     let chart_1 = [for x in 0.0 .. 0.1 .. 6.0 -> sin x + cos (2.0 * x)]
-                    |> Chart.Line |> Chart.WithYAxis(Title="Test")
-    let chartControl = new ChartControl(chart_1)
+                          |> Chart.Line |> Chart.WithYAxis(Title="Test")
+    //let mutable chartControl = new ChartControl(chart_1)    // raise an Exception if creatd here
 
 
     let xrp_btc_bitstamp_collection = new TimeValuesCollector<decimal>()
@@ -54,8 +54,21 @@ type PricesComparisonPanel(engine:Engine) as panel =
     do 
         panel.SuspendLayout()
 
+
+        let chart_1 = [for x in 0.0 .. 0.1 .. 6.0 -> sin x + cos (2.0 * x)]
+                        |> Chart.Line |> Chart.WithYAxis(Title="Test")
+       
+        // wuthout reinitialize this it raise the "Parameter not valid" at System.Drawing.FontFamily.GetName(Int32 language)
+        let chartControl = new ChartControl(chart_1) 
+        panel.Controls.Add chartControl
+        chartControl.Dock <- DockStyle.Fill
+        chartControl.MaximumSize <- new Size(500, 200)
+        chartControl.Font <- new Font("Arial", 10.0f) //FontFamily.GenericSansSerif, a,  FontStyle.Regular)
+
+        chartControl.AutoSize <- true
+
         panel.Controls.Add table
-        table.Dock <- DockStyle.Fill
+        table.Dock <- DockStyle.Top
 
         // headers
         table.Controls.Add(new TextLabel("XRP/USD"), 1, 0)
@@ -85,12 +98,8 @@ type PricesComparisonPanel(engine:Engine) as panel =
         table.Controls.Add(xrpbtc_Bitstamp_Bitfinex_diffLabel, 3,2)
         table.Controls.Add(xrpbtc_Binance_Bitfinex_diffLabel, 3,3)      
 
-        panel.Font <- new Font(new FontFamily("Arial"), 10.0f)
-        panel.Controls.Add chartControl
-        chartControl.Dock <- DockStyle.Fill
-        chartControl.MaximumSize <- new Size(500, 200)
-        let a:float32 = 10.0f
-        chartControl.Font <- new Font("Arial", 10.0f) //FontFamily.GenericSansSerif, a,  FontStyle.Regular)
+              
+
 
         panel.ResumeLayout()
 
@@ -101,9 +110,7 @@ type PricesComparisonPanel(engine:Engine) as panel =
             | p when p = CurrencyPair.XRP_BTC -> xrpbtc_bitstamp_price <- ticker.Last.Value
                                                  xrp_btc_bitstamp_collection.AddValue(ticker.Last.Value)
             | _ -> ()
-            panel.calculateDifference()
-
-            
+            panel.calculateDifference()            
         )
 
         engine.BinanceTickerChanged.Add (fun ticker -> 
@@ -153,3 +160,8 @@ type PricesComparisonPanel(engine:Engine) as panel =
         xrpbtc_Binance_Bitfinex_diffLabel.SetValue( calculateDiffPercentage xrpbtc_binance_price xrpbtc_bitfinex_price)
 
 
+
+        //chart_1 <- [for x in xrp_btc_bitstamp_collection.Values -> x]
+        //           |> Chart.Line |> Chart.WithYAxis(Title="XRP/BTC")
+        //= [for x in 0.0 .. 0.1 .. 6.0 -> sin x + cos (2.0 * x)]
+         //               |> Chart.Line |> Chart.WithYAxis(Title="Test")

@@ -55,7 +55,8 @@ type MainForm (config:settings.AppSettings, engine:Engine) as this =
 
         let fonts = new PrivateFontCollection()
         fonts.AddFontFile("fonts/consola.ttf")
-        // This breaks FSharp.Charting with "Parameter not valid"
+
+        // This breaks FSharp.Charting with "Parameter not valid" at System.Drawing.FontFamily.GetName(Int32 language)
         this.Font <- new Font(fonts.Families.[0], float32(10.), Drawing.FontStyle.Regular)    
         ()
 
