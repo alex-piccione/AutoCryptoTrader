@@ -12,6 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>    
+    <None Include="study and practice\lists.fsx" />    
     <Compile Include="retryer.fs" />    
     <Compile Include="ITrader.fs" />    
     <Compile Include="FirstTrader.fs" />    
@@ -20,7 +21,6 @@
     <Compile Include="Configuration.fs" />    
     <Compile Include="Trading.fs" />    
     <Compile Include="TradeRunner.fs" />    
-    <None Include="lists.fsx" />    
     <Compile Include="Entities.fs" />    
     <Compile Include="ExchangeInterface.fs" />
     <Compile Include="Logging.fs" />
@@ -34,6 +34,10 @@
 
   <ItemGroup>
     <PackageReference Update="FSharp.Core" Version="4.6.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="entities\" />
   </ItemGroup>
 
 </Project>

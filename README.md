@@ -2,18 +2,19 @@
 
 The goal of this project is to allow me to learn F#.  
    
-The project is a bot for trading on a cryptocurrency market.
+The project is a bot for trading on a cryptocurrency markets.
 
 ## How it works
 
 The running process buy a predefined amount of tokens at the current market price.  
-It then place a sell limit order on the market at a calculated price.  
+It then creates a sell limit order on the market at a calculated price.  
 The sell price is calculated using a configurable percentage.  
-When the sell is executed the program wait for a specific amount of time and then make a new purchase.  
+When the sell is executed the program wait for a specific amount of time and then repeats the process.  
 
 ### when to buy ?
 
-When the price goes dowd on X% after X seconds ?
+This logic is not defined yet.  
+When the price goes down of a P percentage after X seconds ?
 
 ## Simulation
 
