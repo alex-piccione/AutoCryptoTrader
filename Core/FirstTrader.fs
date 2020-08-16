@@ -10,8 +10,7 @@ type State =
     | WaitBuyOrder 
     | WaitSellOrder
 
-
-
+///
 type FirstTrader(bitstampClient:Alex75.BitstampApiClient.IClient) as trader=
 
     let logEvent = new Event<string>() (* create the event *)    

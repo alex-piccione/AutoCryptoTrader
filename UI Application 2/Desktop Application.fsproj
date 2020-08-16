@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="settings.yaml" />
-    <Compile Include="settings.fs" />
+    <None Include="configuration.yaml" />
+    <Compile Include="configuration.fs" />
     <Compile Include="colors.fs" />
     <Compile Include="Engine.fs" />
     <Content Include="fonts\ARIALUNI.TTF" />

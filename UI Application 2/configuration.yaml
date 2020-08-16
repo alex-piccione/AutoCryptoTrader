@@ -4,9 +4,5 @@
     price check frequency in seconds: 60
     buy amont in USD: 100 
 
-Bitstamp: 
-    ticker cache: 15
-    account number: "123456"
-    public key: "aaa"
-    secret key: "bbb"
-
+Exchanges:
+    ticker cache: "0:0:15"

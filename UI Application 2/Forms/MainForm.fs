@@ -19,7 +19,7 @@ open panels.bitfinexPanel
 // https://blogs.msdn.microsoft.com/mcsuksoldev/2011/05/27/f-windows-application-template-for-winforms/
 // https://github.com/Acadian-Ambulance/vinyl-ui
 
-type MainForm (config:settings.AppSettings, engine:Engine) as this =
+type MainForm (configuration:configuration.Configuration, engine:Engine, bitstampClient:IClient ) as this =
     inherit Form()
 
     let mainPanel = new Panel()
@@ -30,17 +30,7 @@ type MainForm (config:settings.AppSettings, engine:Engine) as this =
     let binancePanel = new BinancePanel(engine)
     let bitfinexPanel = new BitfinexPanel(engine)
 
-    let initializeTrader() = 
-
-        let bitstampConfig = { 
-            TickerCacheDuration=TimeSpan.FromSeconds(float(config.Bitstamp.``ticker cache``));
-            CustomerId=config.Bitstamp.``account number``
-            PublicKey=config.Bitstamp.``public key``;
-            SecretKey=config.Bitstamp.``secret key``;
-            }
-        let bitstampClient = new Alex75.BitstampApiClient.Client(bitstampConfig) :> IClient
-        
-        
+    let initializeTrader() =
         let trader = new FirstTrader(bitstampClient) :> ITrader
         trader.log.Add (fun log -> logPanel.AddText log )        
         trader

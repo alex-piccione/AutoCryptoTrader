@@ -2,13 +2,12 @@
 
 open System.Threading
 open System.Threading.Tasks
+open System.Collections.Generic
 open System.Linq
 
 open Alex75.Cryptocurrencies
 open Alex75.BitstampApiClient
-open Alex75.BinanceApiClient
-open Alex75.BitfinexApiClient
-open System.Collections.Generic
+
 
 
 

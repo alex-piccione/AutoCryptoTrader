@@ -6,7 +6,6 @@ open System.Windows.Forms
 open engine
 open Alex75.BitstampApiClient
 open Alex75.BinanceApiClient
-//open Alex75.BitfinexApiClient
 open AutoCryptoTrader.DesktopApplication.Forms
 
 
@@ -18,18 +17,19 @@ let main argv =
     Application.SetCompatibleTextRenderingDefault false
 
     
-    let configuration = settings.AppSettings()
+    let configuration = configuration.Configuration()
+    let tickerCache = TimeSpan.Parse(configuration.Exchanges.``ticker cache``)
 
     let bitstampConfig = { 
-        TickerCacheDuration=TimeSpan.FromSeconds(float(configuration.Bitstamp.``ticker cache``));
-        CustomerId=configuration.Bitstamp.``account number``
-        PublicKey=configuration.Bitstamp.``public key``;
-        SecretKey=configuration.Bitstamp.``secret key``;
+        TickerCacheDuration=tickerCache
+        CustomerId=""
+        PublicKey=""
+        SecretKey=""
         }
     let bitstampClient = new Alex75.BitstampApiClient.Client(bitstampConfig) :> Alex75.BitstampApiClient.IClient
 
     let binanceSettings = {
-        TickerCacheDuration=TimeSpan.FromSeconds(10.)
+        TickerCacheDuration=tickerCache
         PublicKey=""
         SecretKey=""}
     let binanceClient = new Alex75.BinanceApiClient.Client(binanceSettings) :> Alex75.BinanceApiClient.IClient
@@ -40,7 +40,7 @@ let main argv =
     let engine = Engine(bitstampClient, binanceClient, bitfinexClient)
 
 
-    use form = new MainForm(configuration, engine)
+    use form = new MainForm(configuration, engine, bitstampClient)
     // to avoid the error "Invoke or BeginInvoke cannot be called on a control until the window handle has been created"
     // when try to update labels
     form.HandleCreated.Add(fun _ -> engine.startUpdatingUI() )
