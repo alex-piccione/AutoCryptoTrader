@@ -11,6 +11,7 @@ open engine
 open Panels.logPanel
 open Panels.bitstampPanel
 open panels.binancePanel
+open panels.bitfinexPanel
 
 
 
@@ -27,6 +28,7 @@ type MainForm (config:settings.AppSettings, engine:Engine) as this =
     let buyButton = new Button()
     let bitstampPanel = new BitstampPanel(engine)
     let binancePanel = new BinancePanel(engine)
+    let bitfinexPanel = new BitfinexPanel(engine)
 
     let initializeTrader() = 
 
@@ -79,13 +81,15 @@ type MainForm (config:settings.AppSettings, engine:Engine) as this =
         logPanel.SetText "Start"
 
 
-        // Bitstamp panel
+        // Exchanges panels
         mainPanel.Controls.Add bitstampPanel
         bitstampPanel.Dock <- DockStyle.Top   
         
         mainPanel.Controls.Add binancePanel
         binancePanel.Dock <- DockStyle.Top
 
+        mainPanel.Controls.Add bitfinexPanel
+        bitfinexPanel.Dock <- DockStyle.Top
 
         // test
         //let p1 = new controls.borderPanel.BorderPanel(colors.red)
@@ -115,7 +119,11 @@ type MainForm (config:settings.AppSettings, engine:Engine) as this =
 
         let trader = initializeTrader()
         trader.start()
-        buyButton.Click.Add ( fun _ -> trader.buy() )
+        buyButton.Click.Add ( fun _ -> 
+            trader.buy() 
+            //new System.Threading.Timer( fun _ -> engine.updateBalance() ). |> ignore
+            //()
+        )
 
         
 

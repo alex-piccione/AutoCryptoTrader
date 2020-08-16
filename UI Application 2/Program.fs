@@ -6,6 +6,7 @@ open System.Windows.Forms
 open engine
 open Alex75.BitstampApiClient
 open Alex75.BinanceApiClient
+//open Alex75.BitfinexApiClient
 open AutoCryptoTrader.DesktopApplication.Forms
 
 
@@ -33,7 +34,10 @@ let main argv =
         SecretKey=""}
     let binanceClient = new Alex75.BinanceApiClient.Client(binanceSettings) :> Alex75.BinanceApiClient.IClient
 
-    let engine = Engine(bitstampClient, binanceClient)
+    let bitfinexConfiguration = Alex75.BitfinexApiClient.Configuration("", "")
+    let bitfinexClient = new Alex75.BitfinexApiClient.Client( bitfinexConfiguration)
+
+    let engine = Engine(bitstampClient, binanceClient, bitfinexClient)
 
 
     use form = new MainForm(configuration, engine)

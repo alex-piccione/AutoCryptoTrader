@@ -22,13 +22,13 @@
     <Compile Include="Trading.fs" />    
     <Compile Include="TradeRunner.fs" />    
     <Compile Include="Entities.fs" />    
-    <Compile Include="ExchangeInterface.fs" />
+    <Compile Include="ExchangesInterface.fs" />
     <Compile Include="Logging.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Alex75.BitstampApiClient" Version="0.5.3.3" />
+    <PackageReference Include="Alex75.BitstampApiClient" Version="0.6.3.7" />
     <PackageReference Include="log4net" Version="2.0.8" />
   </ItemGroup>
 

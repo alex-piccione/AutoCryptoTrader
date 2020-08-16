@@ -15,5 +15,6 @@ let Bitstamp_bg = Color.FromArgb(021, 158, 073)
 let Bitstamp_fg = Color.FromArgb(250, 250, 250)
 
 let Binance = Color.FromArgb(245, 188, 0)
+let Bitfinex = Color.FromArgb(103, 142, 047)
 
 let buttonForeColor = Color.FromArgb(240,240,240) 
