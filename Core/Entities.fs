@@ -6,7 +6,7 @@ type Currency = {
     Name:string
 }
 
-/// Represent the price of currency AAA on currency BBB (AAA/BBB)
+/// Represents the price of currency AAA on currency BBB (AAA/BBB)
 type Price = { 
     // the AAA of AAA/BBB
     MainCurrency:Currency
