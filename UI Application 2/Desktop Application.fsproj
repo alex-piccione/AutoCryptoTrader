@@ -22,6 +22,9 @@
     <Content Include="images\001.jpg" />
     <Content Include="images\104536575-stock-market-logo-simple-up-and-down-arrows-upward-downward-arrows-in-green-and-red-isolated-on-whit.jpg" />
     <Content Include="images\94638279-arrows-up-and-down-green-and-red-icons.jpg" />
+    <Content Include="images\Bitstamp.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="images\up-or-down-_400.jpg" />
     <Compile Include="Controls\BorderPanel.fs" />
     <Compile Include="Controls\PriceLabel.fs" />

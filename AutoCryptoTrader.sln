@@ -11,6 +11,7 @@ Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "UnitTests", "UnitTests\Unit
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CDA2E373-F63B-47E8-920D-BF3EF77C4632}"
 	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
 		Core\DEV TIPS.md = Core\DEV TIPS.md
 		README.md = README.md
 	EndProjectSection

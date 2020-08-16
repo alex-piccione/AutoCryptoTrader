@@ -45,9 +45,9 @@ type MainForm (config:settings.AppSettings, engine:Engine) as this =
 
     let setFont () = 
 
-        let fonts = new PrivateFontCollection()
-        fonts.AddFontFile("fonts/consola.ttf")
-        this.Font <- new Font(fonts.Families.[0], float32(10.), Drawing.FontStyle.Regular)    
+        //let fonts = new PrivateFontCollection()
+        //fonts.AddFontFile("fonts/consola.ttf")
+        //this.Font <- new Font(fonts.Families.[0], float32(10.), Drawing.FontStyle.Regular)    
         ()
 
     do 
@@ -64,7 +64,7 @@ type MainForm (config:settings.AppSettings, engine:Engine) as this =
         //var exe = System.Reflection.Assembly.GetExecutingAssembly()
         //var iconStream = exe.GetManifestResourceStream("Namespace.IconName.ico")
         //if (iconStream != null) Icon = new Icon(iconStream)
-        this.Icon <- new Icon("icon.ico")
+        //this.Icon <- new Icon("icon.ico")
 
 
         // main panel 
