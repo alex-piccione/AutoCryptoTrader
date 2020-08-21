@@ -11,7 +11,10 @@ type State =
     | WaitSellOrder
 
 ///
-type FirstTrader(bitstampClient:Alex75.BitstampApiClient.IClient) as trader=
+type FirstTrader(bitstampClient:Alex75.BitstampApiClient.IClient) as trader =
+
+    //bitstampClient.Li
+    //let a = bitstampClient :> IApiClient.ListPairs()
 
     let logEvent = new Event<string>() (* create the event *)    
     
@@ -30,13 +33,18 @@ type FirstTrader(bitstampClient:Alex75.BitstampApiClient.IClient) as trader=
         let timer = new Timer( fun s -> trader.readTicker() )
         timer.Change(0, 15000 ) |> ignore
         state <- State.Idle
+                  
+                  
+    let getTicker () =
+        let response = bitstampClient.GetTicker(mainCurrency, baseCurrency)
+        match response.IsSuccess with
+        | true -> response.Ticker.Value
+        | _ -> failwith response.Error        
 
-                       
-
-    member __.readTicker() =
+    member this.readTicker() =
 
         try
-            let ticker = bitstampClient.GetTicker( mainCurrency, baseCurrency)
+            let ticker = getTicker()
             let spread = ticker.Ask - ticker.Bid
             let spreadPerc = (spread / ticker.Bid)*100m
 
@@ -101,7 +109,7 @@ type FirstTrader(bitstampClient:Alex75.BitstampApiClient.IClient) as trader=
             //let buyPrice = askPrice + 0.00001m;
             //let sellPrice = askPrice * (1 + minProfitPercentage / 100);
 
-            let ticker = bitstampClient.GetTicker(mainCurrency, baseCurrency)
+            let ticker = getTicker()
 
             let priceMargin = 0.0005m
 

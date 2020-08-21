@@ -38,38 +38,38 @@ type Engine(bitstampClient: Alex75.BitstampApiClient.IClient,
                 CurrencyPair.XRP_BTC
                 |]) 
 
-            Parallel.ForEach(tickers.Values, fun ticker -> bitstampTickerChanged.Trigger(ticker) ) |> ignore 
+            let manageTickerResponse response = match (response:TickerResponse).IsSuccess with
+                                                | true -> bitstampTickerChanged.Trigger(response.Ticker.Value) 
+                                                | _ -> error.Trigger response.Error
+
+            Parallel.ForEach(tickers.Values, manageTickerResponse) |> ignore
 
         with e -> error.Trigger(sprintf "Failed to update Bitstamp prices. %s" e.Message)
 
+
+        let manageExchangeGetTicker (pair, getTicker, triggerTicker) =
+            try
+                triggerTicker (getTicker pair)
+            with e -> error.Trigger(e.Message)
+
+
+        //PSeq.
         // Binance
-        try
-            let response = binanceClient.GetTicker(CurrencyPair.XRP_BTC)
-            if response.IsSuccess then binanceTickerChanged.Trigger(response.Ticker.Value) 
-
-            match binanceClient.GetTicker(CurrencyPair("XRP", "ETH")) with
-            | r when r.IsSuccess -> binanceTickerChanged.Trigger(r.Ticker.Value) 
-            | _ -> ()
-
-        with e -> error.Trigger(sprintf "Failed to update Binance prices. %s" e.Message)     
+        [
+            CurrencyPair.XRP_USD
+            //CurrencyPair.XRP_EUR            
+            CurrencyPair.XRP_BTC
+            CurrencyPair.XRP_ETH
+        ].AsParallel().ForAll (fun pair -> manageExchangeGetTicker(pair, binanceClient.GetTicker, binanceTickerChanged.Trigger))
 
         // Bitfinex
-        try
-            let bitfinexPairs = [|
-                CurrencyPair.XRP_USD
-                //CurrencyPair.XRP_EUR            
-                CurrencyPair.XRP_BTC
-                CurrencyPair.XRP_ETH
-                |]
+        [
+            CurrencyPair.XRP_USD
+            //CurrencyPair.XRP_EUR            
+            CurrencyPair.XRP_BTC
+            CurrencyPair.XRP_ETH
+        ].AsParallel().ForAll (fun pair -> manageExchangeGetTicker(pair, bitfinexClient.GetTicker, bitfinexTickerChanged.Trigger))
 
-            let bitfinexGetTicker pair = 
-                let response = bitfinexClient.GetTicker(pair) 
-                if response.IsSuccess then bitfinexTickerChanged.Trigger response.Ticker.Value
-                else error.Trigger response.Error
-
-            Parallel.ForEach (bitfinexPairs, bitfinexGetTicker) |> ignore
-        
-        with e -> error.Trigger(sprintf "Failed to update Bitfinex prices. %s" e.Message)    
 
 
     let updateBalance() =  
