@@ -1,6 +1,6 @@
 # AutoCryptoTrader
 
-The goal of this project is to allow me to learn F#.  
+**The goal of this project is just to learn and practice F#.**  
    
 The project is a bot for trading on a cryptocurrency markets.
 
